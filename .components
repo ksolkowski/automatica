@@ -1,0 +1,10 @@
+---
+:orm: sequel
+:test: none
+:mock: none
+:script: none
+:renderer: haml
+:stylesheet: sass
+:namespace: Automatica
+:migration_format: number
+:admin_renderer: haml

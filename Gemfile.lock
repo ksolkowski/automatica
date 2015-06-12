@@ -1,0 +1,143 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (4.2.1)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    addressable (2.3.8)
+    automatic-client (1.0.0)
+      activesupport
+      addressable
+      dotenv
+      faraday
+      faraday_middleware
+      multi_json
+      polylines
+      restless_router
+      ruby-progressbar
+      terminal-table
+      thor
+      tzinfo
+    bcrypt (3.1.10)
+    dotenv (2.0.1)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
+    haml (4.0.6)
+      tilt
+    hashie (3.4.0)
+    http_router (0.11.1)
+      rack (>= 1.0.0)
+      url_mount (~> 0.2.1)
+    i18n (0.7.0)
+    json (1.8.2)
+    jwt (1.4.1)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.25.1)
+    minitest (5.7.0)
+    moneta (0.7.20)
+    multi_json (1.11.0)
+    multi_xml (0.5.5)
+    multipart-post (2.0.0)
+    oauth2 (1.0.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
+    omniauth (1.2.2)
+      hashie (>= 1.2, < 4)
+      rack (~> 1.0)
+    omniauth-automatic (0.0.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.2.0)
+      faraday (>= 0.8, < 0.10)
+      multi_json (~> 1.3)
+      oauth2 (~> 1.0)
+      omniauth (~> 1.2)
+    padrino (0.12.5)
+      padrino-admin (= 0.12.5)
+      padrino-cache (= 0.12.5)
+      padrino-core (= 0.12.5)
+      padrino-gen (= 0.12.5)
+      padrino-helpers (= 0.12.5)
+      padrino-mailer (= 0.12.5)
+      padrino-support (= 0.12.5)
+    padrino-admin (0.12.5)
+      padrino-core (= 0.12.5)
+      padrino-helpers (= 0.12.5)
+    padrino-cache (0.12.5)
+      moneta (~> 0.7.0)
+      padrino-core (= 0.12.5)
+      padrino-helpers (= 0.12.5)
+    padrino-core (0.12.5)
+      activesupport (>= 3.1)
+      http_router (~> 0.11.0)
+      padrino-support (= 0.12.5)
+      rack (< 1.6.0)
+      rack-protection (>= 1.5.0)
+      sinatra (~> 1.4.2)
+      thor (~> 0.18)
+    padrino-gen (0.12.5)
+      bundler (~> 1.0)
+      padrino-core (= 0.12.5)
+    padrino-helpers (0.12.5)
+      i18n (~> 0.6, >= 0.6.7)
+      padrino-support (= 0.12.5)
+      tilt (~> 1.4.1)
+    padrino-mailer (0.12.5)
+      mail (~> 2.5.3)
+      padrino-core (= 0.12.5)
+    padrino-support (0.12.5)
+      activesupport (>= 3.1)
+    pg (0.18.2)
+    polyglot (0.3.5)
+    polylines (0.2.0)
+    rack (1.5.3)
+    rack-protection (1.5.3)
+      rack
+    rake (10.4.2)
+    restless_router (0.0.3)
+      addressable
+    ruby-progressbar (1.7.5)
+    sass (3.4.14)
+    sequel (4.23.0)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
+    sqlite3 (1.3.10)
+    terminal-table (1.4.5)
+    thor (0.19.1)
+    thread_safe (0.3.5)
+    tilt (1.4.1)
+    treetop (1.4.15)
+      polyglot
+      polyglot (>= 0.3.1)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
+    url_mount (0.2.1)
+      rack
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  automatic-client
+  bcrypt
+  haml
+  omniauth
+  omniauth-automatic
+  padrino (= 0.12.5)
+  pg
+  rake
+  sass
+  sequel
+  sqlite3
