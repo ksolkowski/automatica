@@ -22,9 +22,11 @@ Automatica.run ($rootScope) ->
   $rootScope.current_user = window.current_user if window.current_user?
   delete window.current_user
 Automatica.controller 'BodyController',  ($scope, $route, Car, Trip) ->
+  $scope.setCars = (cars) ->
+    $scope.cars = cars.map((x)-> new Car(x))
   $scope.loadTrips = (car) ->
-    Trip.query({car_id: car.automatic_id}).$promise.then (trips) ->
-      car.trips = trips
+    Trip.query({car_id: car.automatic_id, limit: 10}).$promise.then (trips) ->
+      car.trips = trips.map((x) -> x.attributes)
     console.log car
   $scope.save = (car) ->
     car.$save()
@@ -43,7 +45,7 @@ Automatica.controller 'BodyController',  ($scope, $route, Car, Trip) ->
     $scope.car.user_id = $scope.current_user.id
   $scope.fetch = () ->
     Car.fetch().$promise.then (cars) ->
-      $scope.cars = cars.map((x) -> x.attributes)
+      $scope.fetchedCars = cars.map((x) -> x.attributes)
   
 $(document).on('ready page:load', ->
   angular.bootstrap("body", ['Automatica'])

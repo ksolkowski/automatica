@@ -2,9 +2,9 @@ Automatica::App.controllers :trips do
   get :index, map: '/trips', provides: [:json] do
     puts params.inspect
     pagination_params = {
-      :page    => params.fetch(:page, 1),
-      :limit   => params.fetch(:limit, 25),
-      :vehicle => params[:car_id]
+      page: params.fetch("page", 1),
+      limit: params.fetch("limit", 25),
+      vehicle: params[:car_id]
     }
 
     trips_route = Automatic::Client.routes.route_for('trips')
