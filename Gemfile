@@ -14,6 +14,8 @@ source 'https://rubygems.org'
 gem 'rake'
 
 # Component requirements
+gem 'rack-coffee', :require => 'rack/coffee'
+gem 'padrino-sprockets', :require => 'padrino/sprockets', :git => 'https://github.com/nightsailer/padrino-sprockets.git'
 gem 'bcrypt'
 gem 'sass'
 gem 'haml'
@@ -22,7 +24,7 @@ gem 'sequel'
 gem 'automatic-client'
 gem 'omniauth-automatic'
 gem 'omniauth'
-
+gem 'coffee-script'
 group :development do 
   gem "sqlite3"
 end

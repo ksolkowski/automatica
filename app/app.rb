@@ -1,8 +1,11 @@
 module Automatica
   class App < Padrino::Application
+    register CoffeeInitializer
     register SassInitializer
     register Padrino::Mailer
     register Padrino::Helpers
+    register Padrino::Sprockets
+    sprockets
 
     enable :sessions
 

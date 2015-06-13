@@ -9,9 +9,13 @@
     %meta{content: 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'}
     %meta{name: :viewport, content: 'width=device-width,initial-scale=1'}
     %link{href: 'http://fonts.googleapis.com/css?family=Varela', rel: :stylesheet}
+    %title="Automatica"
+    :javascript
+      window.current_user = #{current_user.to_json.html_safe}
     =stylesheet_link_tag 'bootstrap', 'application'
+    =csrf_meta_tags
 
-  %body
+  %body{"ng-controller" => "BodyController"}
     %nav.navbar.navbar-fixed-top
       .navbar-inner
         .container
@@ -33,4 +37,4 @@
       .footer-wrapper.container
         %p.pull-left
         %ul.pull-right.footer-links
-    =javascript_include_tag 'jquery-1.9.0.min', 'jquery-ujs', 'bootstrap.min'
+    =javascript_include_tag 'app'

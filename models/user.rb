@@ -3,6 +3,8 @@ class User < Sequel::Model
   USER = "user"
   plugin :validation_helpers
 
+  one_to_many :cars
+
   attr_accessor :password, :password_confirmation
 
   def validate
@@ -38,16 +40,12 @@ class User < Sequel::Model
     self[id] rescue nil
   end
 
-  def self.find_or_create_by_email(email, automatic_id=nil)
-    self[email: email] || self.create(email: email, automatic_id: automatic_id, role: USER)
-  end
-
   # omniauth_params.info
   # {email: "", first_name="", id="", last_name=""}
   # search based on the automatic_id and update first & lastname and email if needed
   def self.find_or_create_from_oauth(omniauth_params)
     omniauth = omniauth_params.info
-    user = (self[automatic_id: omniauth_params.info["id"]] || self.new(
+    user = (self[automatic_id: omniauth_params.info["id"]] || self.create(
       { email: omniauth.email, first_name: omniauth.first_name, last_name: omniauth.last_name, automatic_id: omniauth.id, role: ADMIN }
     ))
     user

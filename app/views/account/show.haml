@@ -1,1 +1,45 @@
-=@vehicles.inspect
+%h1 Cars
+
+%ul.list-group
+  -if @cars.empty?
+    %li.list-group-item
+      .row
+        .col-md-2 Car not listed?
+        .col-md-8
+        .col-md-2
+          %a{"ng-click" => "fetch()"} Refetch Car list
+  -for car in @cars
+    %li.list-group-item
+      .row
+        .col-md-2
+          %img.img-thumbnail{src: "http://placehold.it/100/100"}
+        .col-md-9
+          .col-md-1
+            %b Name:
+          .col-md-2=car.display_name
+          %br
+          .col-md-1
+            %b Year:
+          .col-md-2=car.year
+          %br
+          .col-md-1
+            %b Make:
+          .col-md-2=car.make
+          %br
+          .col-md-1
+            %b Model:
+          .col-md-2="#{car.display_model}, #{car.submodel}"
+          %br
+        .col-md-1
+          %i.glyphicon.glyphicon-plus{style: "height: 50px; margin-top: 50px;", "ng-click" => "loadTrips(#{car.to_json.html_safe})"}
+.panel.panel-default{"ng-if" => "cars"}
+  .panel-heading
+    %h3 Add A Car!
+  .panel-body
+    .btn-group.btn-group-justified
+      .btn-group{"ng-repeat" => "possibleCar in cars"}
+        .btn.btn-default{"ng-click" => "setCar(possibleCar)", "ng-class" => "isSelected(possibleCar) ? 'active' : ''"} {{ possibleCar.display_name }}
+    %form{"ng-submit" => "save(car)", name: "form"}
+      %div{"ng-if" => "!saving"}
+      %button.btn.btn-default save
+    %pre {{ car | json }}
