@@ -1,7 +1,7 @@
 Automatica::App.controllers :account do
-  get :show, map: '/account' do
+  get :index, map: '/account' do
     @cars = current_user.cars
-    render :show
+    render :index
   end
 
   get :logout, map: '/logout' do

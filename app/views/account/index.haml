@@ -46,7 +46,7 @@
               %td {{ trip.ended_at | date:'medium' }}
               %td {{ trip.distance_m | number }}m
               %td
-                %button.btn.btn-default{"ng-click" => "showMap(trip)"} Show Map
+                %button.btn.btn-default{"ng-click" => "getTrip(trip)"} Show Map
 
 .panel.panel-default{"ng-if" => "fetchedCars"}
   .panel-heading

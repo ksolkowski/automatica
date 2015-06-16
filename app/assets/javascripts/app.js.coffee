@@ -5,29 +5,31 @@
 #= require angular-resource.min
 #= require angular-route.min
 #= underscore
-#= require_directory ./resources
-#= require_directory ./controllers
 #= require_self
 
 Automatica = angular.module('Automatica', ['ngRoute', 'ngResource'])
 
 Automatica.factory "Car", ($resource) ->
-  $resource "/cars", { id: "@id" }
+  $resource "/cars/:id", { id: "@id" }
   , 'update':  { method: 'PUT' }
   , 'fetch': { method: 'GET', isArray: true, url: "/cars/fetch"}
 Automatica.factory "Trip", ($resource) ->
-  $resource "/trips", { id: "@id" }
+  $resource "/trips/:id", { id: "@id" }
 
 Automatica.run ($rootScope) ->
   $rootScope.current_user = window.current_user if window.current_user?
   delete window.current_user
+
 Automatica.controller 'BodyController',  ($scope, $route, Car, Trip) ->
   $scope.setCars = (cars) ->
     $scope.cars = cars.map((x)-> new Car(x))
   $scope.loadTrips = (car) ->
-    Trip.query({car_id: car.automatic_id, limit: 10}).$promise.then (trips) ->
-      car.trips = trips.map((x) -> x.attributes)
-    console.log car
+    Trip.query(query: {car_id: car.id}).$promise.then (trips) ->
+      car.trips = trips
+
+  $scope.getTrip = (trip) ->
+    Trip.get(id: trip.id)
+
   $scope.save = (car) ->
     car.$save()
   $scope.isSelected = (car) ->

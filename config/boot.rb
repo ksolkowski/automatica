@@ -6,6 +6,9 @@ PADRINO_ROOT = File.expand_path('../..', __FILE__) unless defined?(PADRINO_ROOT)
 require 'rubygems' unless defined?(Gem)
 require 'bundler/setup'
 Bundler.require(:default, RACK_ENV)
+ 
+# Load worker definitions
+require File.join(PADRINO_ROOT, 'config', 'workers.rb')
 
 ##
 # ## Enable devel logging
@@ -35,6 +38,8 @@ Bundler.require(:default, RACK_ENV)
 # Add your before (RE)load hooks here
 #
 Padrino.before_load do
+  Time.zone = 'Central Time (US & Canada)'
+  Padrino.dependency_paths << Padrino.root('concerns/*.rb')
 end
 
 ##

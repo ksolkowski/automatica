@@ -19,12 +19,14 @@ gem 'padrino-sprockets', :require => 'padrino/sprockets', :git => 'https://githu
 gem 'bcrypt'
 gem 'sass'
 gem 'haml'
-
+gem 'thin'
 gem 'sequel'
 gem 'automatic-client'
 gem 'omniauth-automatic'
 gem 'omniauth'
 gem 'coffee-script'
+gem 'sidekiq'
+gem 'activesupport'
 group :development do 
   gem "sqlite3"
 end

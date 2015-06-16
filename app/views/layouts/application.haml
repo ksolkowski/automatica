@@ -24,7 +24,7 @@
           -if signed_in?
             .navbar-collapse.collapse.navbar-right
               %ul.nav.navbar-nav
-                %li=link_to 'account', url(:account, :show)
+                %li=link_to 'account', url(:account, :index)
                 %li=link_to 'trips', url(:trips, :index)
                 %li=link_to 'logout', url(:account, :logout)
             
