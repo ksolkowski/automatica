@@ -3,6 +3,12 @@
 module Automatica
   class App
     module HomeHelper
+      def icon_tag(icon, options={})
+        """
+        <i class=\"glyphicon glyphicon-#{icon} #{options.delete(:class)}\" #{options.map{|x,y| "#{x}=\"#{y}\""}.join(" ")}></i>
+        """.html_safe
+      end
+
       def current_user=(user)
         @current_user = user
       end

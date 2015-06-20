@@ -12,9 +12,8 @@
     %title="Automatica"
     :javascript
       window.current_user = #{current_user.to_json.html_safe};
-      window.mapBoxApiKey = "#{ENV["MAPBOX_API_KEY"]}";
-      window.mapBoxAccessToken = "#{ENV["MAPBOX_ACCESS_TOKEN"]}";
-    =stylesheet_link_tag 'bootstrap', 'application'
+      
+    =stylesheet_link_tag 'bootstrap', 'general', 'application'
     %link{href: 'https://api.tiles.mapbox.com/mapbox.js/v2.2.0/mapbox.css', rel: 'stylesheet' }
 
     

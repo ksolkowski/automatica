@@ -1,11 +1,4 @@
 %h1 Cars
--if @cars.empty?
-  %li.list-group-item
-    .row
-      .col-md-2 Car not listed?
-      .col-md-8
-      .col-md-2
-        %a{"ng-click" => "fetch()"} Refetch Car list
 %ul.list-group{"ng-init" => "setCars(#{@cars.to_json.html_safe})"}
   %li.list-group-item{"ng-repeat" => "car in cars"}
     .row
@@ -45,16 +38,18 @@
             %tr{"ng-repeat" => "trip in car.trips"}
               %td {{ trip.started_at | date:'medium' }}
               %td {{ trip.ended_at | date:'medium' }}
-              %td 
-                %button.btn.btn-default{"ng-click" => "modal(trip)"} 
-                  {{ tripLength(trip.distance_m) | number : 2 }}{{ distanceUnit }}
+              %td {{ tripLength(trip.distance_m) | number : 2 }}{{ distanceUnit }}
               %td
-                %mapbox{"map-id" => "{{ mapBoxAccessToken }}", lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", zoom: 10, "ng-if" => "trip", width: 200, height: 200}
-                  %feature-layer{data: "{{ trip.geoLine }}"}
-                  %marker{lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", color: "#39cccc", icon: "car"}
-                    {{ trip.start_location.tag | humanize }}
-                  %marker{lat: "{{ trip.end_location.lat }}", lng: "{{ trip.end_location.lon }}", color: "#BBBBBB", icon: "cross"}
-                    {{ trip.end_location.tag | humanize }}
+                %span{"ng-if" => "trip.path"}
+                  %button.btn.btn-default{"ng-click" => "viewMap(trip)"} View Map
+                  %mapbox{"map-id" => "{{ mapBoxAccessToken }}", lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", zoom: 10, "ng-if" => "trip", width: 200, height: 200}
+                    %feature-layer{data: "{{ trip.geoLine }}"}
+                    %marker{lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", color: "#39cccc", icon: "car"}
+                      {{ trip.start_location.tag | humanize }}
+                    %marker{lat: "{{ trip.end_location.lat }}", lng: "{{ trip.end_location.lon }}", color: "#BBBBBB", icon: "cross"}
+                      {{ trip.end_location.tag | humanize }}
+                %span{"ng-if" => "!trip.path"} No Path Recorded
+                
 .panel.panel-default{"ng-if" => "fetchedCars"}
   .panel-heading
     %h3 Add A Car!

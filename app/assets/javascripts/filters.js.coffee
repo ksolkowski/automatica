@@ -14,6 +14,6 @@ Automatica.filter 'dynamicFilter', ($filter) ->
 
 Automatica.filter "metersToMiles", ($filter) ->
   (meters, round) ->
-    m = parseFloat(meters) * 0.000621371
+    m = parseFloat(meters) * 
     console.log parseFloat(m, round)
     parseFloat(m, round)

@@ -13,15 +13,16 @@
 #= require resources
 #= require filters
 #= require directives
+#= require constants
 
 #= require_tree .
 
 Automatica = angular.module('Automatica', ['ngRoute', 'ngResource', 'ui.bootstrap', 'angular-mapbox'])
 
-Automatica.run ($rootScope) ->
+Automatica.run ($rootScope, $constants) ->
   $rootScope.current_user = window.current_user if window.current_user?
-  $rootScope.mapBoxAccessToken = window.mapBoxAccessToken
-  $rootScope.mapBoxApiKey = window.mapBoxApiKey
+  $rootScope.mapBoxAccessToken = $constants.mapBox.accessToken
+  $rootScope.mapBoxApiKey = $constants.mapBox.apiKey
 
 Automatica.service '$helpers', ($routeParams, $modal, $location, $interval, $sce, $redisPoll) ->
 

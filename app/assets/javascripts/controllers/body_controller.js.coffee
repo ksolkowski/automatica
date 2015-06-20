@@ -1,14 +1,6 @@
 Automatica = angular.module('Automatica')
 
 Automatica.controller 'BodyController',  ($scope, $route, Car, Trip, $modal) ->
-  $scope.mapTile = {
-      styleId: $scope.maxBoxId,
-      lineStyle: {
-        color: '#08b1d5',
-        opacity: 0.9
-      }
-    }
-
   $scope.distanceUnit = "m"
 
   $scope.tripLength = (length) ->
@@ -23,21 +15,17 @@ Automatica.controller 'BodyController',  ($scope, $route, Car, Trip, $modal) ->
     else
       $scope.distanceUnit = "m"
 
-  $scope.modal = (trip) ->
+  $scope.viewMap = (trip) ->
     modalInstance = $modal.open(
-      templateUrl: "/views/trips/form.html"
+      templateUrl: '/templates/trips/form.html'
       controller: "TripMapController"
+      resolve:
+        trip: -> trip
     )
   $scope.setCars = (cars) ->
     $scope.cars = cars.map((x)-> new Car(x))
   $scope.loadTrips = (car) ->
-    car.trips ||= []
-    Trip.query(query: {car_id: car.id}).$promise.then (trips) ->
-      angular.forEach trips, (trip) ->
-        if trip.path
-          line = L.polyline(polyline.decode(trip.path), $scope.mapTile.lineStyle)
-          trip.geoLine = line.toGeoJSON()
-        car.trips.push trip
+    car.trips = Trip.query(query: {car_id: car.id})
 
   $scope.save = (car) ->
     car.$save()
@@ -57,4 +45,21 @@ Automatica.controller 'BodyController',  ($scope, $route, Car, Trip, $modal) ->
   $scope.fetch = () ->
     Car.fetch().$promise.then (cars) ->
       $scope.fetchedCars = cars.map((x) -> x.attributes)
-Automatica.controller 'TripMapController',  ($scope) ->
+
+Automatica.controller 'TripMapController',  ($scope, $modalInstance, $constants, trip) ->
+  $scope.mapTile = {
+    styleId: $constants.mapBox.accessToken,
+    lineStyle: {
+      color: '#08b1d5',
+      opacity: 0.9
+    }
+  }
+  
+  if trip.path
+    line = L.polyline(polyline.decode(trip.path), $scope.mapTile.lineStyle)
+    trip.geoLine = line.toGeoJSON()
+    console.log trip.geoLine
+    $scope.trip = trip
+
+  $scope.cancel = ->
+    $modalInstance.dismiss('cancel')

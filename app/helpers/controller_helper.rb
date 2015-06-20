@@ -8,7 +8,7 @@ Automatica::App.helpers do
   end
 
   def limit
-    50
+    10#50
   end
 
   def get_models

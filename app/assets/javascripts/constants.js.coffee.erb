@@ -1,0 +1,9 @@
+constants_object = {}
+
+constants_object.mapBox = {
+  apiKey: '<%=ENV["MAPBOX_API_KEY"]%>'
+  accessToken: '<%=ENV["MAPBOX_ACCESS_TOKEN"]%>'
+}
+
+Automatica = angular.module('Automatica')
+Automatica.constant "$constants", constants_object

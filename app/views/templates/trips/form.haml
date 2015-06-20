@@ -1,0 +1,13 @@
+.modal-header
+  %h3 
+    Trip from {{ trip.started_at | date:'medium' }}
+    %small.pull-right
+      %a{"ng-click" => 'cancel()', rel: :tooltip, title: "cancel"}
+        =icon_tag "remove"
+.modal-body
+  %mapbox{"map-id" => "{{ mapBoxAccessToken }}", lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", zoom: 10, height: 200, width: 538}
+    %feature-layer{data: "{{ trip.geoLine }}"}
+    %marker{lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", color: "#39cccc", icon: "car"}
+      {{ trip.start_location.tag | humanize }}
+    %marker{lat: "{{ trip.end_location.lat }}", lng: "{{ trip.end_location.lon }}", color: "#BBBBBB", icon: "cross"}
+      {{ trip.end_location.tag | humanize }}

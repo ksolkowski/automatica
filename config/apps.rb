@@ -19,7 +19,7 @@
 # However, the mounted app can be modified as needed:
 #
 #   Padrino.mount('AppName', :app_file => 'path/to/file', :app_class => 'BlogApp').to('/')
-#
+# #app/views/templates
 
 ##
 # Setup global project settings for your apps. These settings are inherited by every subapp. You can
