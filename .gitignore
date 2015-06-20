@@ -8,3 +8,5 @@ db/*.db
 .*.sw*
 
 .env
+
+db/development.sqlite3

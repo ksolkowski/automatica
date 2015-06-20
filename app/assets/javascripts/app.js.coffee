@@ -25,8 +25,31 @@ Automatica.run ($rootScope) ->
 
 Automatica.service '$helpers', ($routeParams, $modal, $location, $interval, $sce, $redisPoll) ->
 
-  this.whatLineColor(trip) ->
-    
+  # red == bad, green == good
+  this.whatLineColor = (trip) ->
+    return "#000000" if !trip.score_events
+    score = parseFloat(trip.score_events)
+    if score < 10
+      return 
+    else if score < 20
+      return
+    else if score < 30
+      return 
+    else if score < 40
+      return 
+    else if score < 50
+      return 
+    else if score < 60
+      return 
+    else if score < 70
+      return 
+    else if score < 80
+      return 
+    else if score < 90
+      return 
+    else
+      return "#"
+
 $(document).on('ready page:load', ->
   angular.bootstrap("body", ['Automatica'])
 )

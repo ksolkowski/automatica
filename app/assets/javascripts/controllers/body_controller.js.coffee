@@ -8,18 +8,36 @@ Automatica.controller 'BodyController',  ($scope, $route, Car, Trip, $modal) ->
         opacity: 0.9
       }
     }
+
+  $scope.distanceUnit = "m"
+
+  $scope.tripLength = (length) ->
+    if $scope.distanceUnit is "m"
+      length
+    else
+      length * 0.000621371
+
+  $scope.whatDistanceUnit = () ->
+    if $scope.distanceUnit is "m"
+      $scope.distanceUnit = "mi"
+    else
+      $scope.distanceUnit = "m"
+
+  $scope.modal = (trip) ->
+    modalInstance = $modal.open(
+      templateUrl: "/views/trips/form.html"
+      controller: "TripMapController"
+    )
   $scope.setCars = (cars) ->
     $scope.cars = cars.map((x)-> new Car(x))
   $scope.loadTrips = (car) ->
+    car.trips ||= []
     Trip.query(query: {car_id: car.id}).$promise.then (trips) ->
-      trips.map(
-        (trip) -> 
-          if trip.path
-            line = L.polyline(polyline.decode(trip.path), $scope.mapTile.lineStyle)
-            trip.geoLine = line.toGeoJSON()
-          trip
-      )
-      car.trips = trips
+      angular.forEach trips, (trip) ->
+        if trip.path
+          line = L.polyline(polyline.decode(trip.path), $scope.mapTile.lineStyle)
+          trip.geoLine = line.toGeoJSON()
+        car.trips.push trip
 
   $scope.save = (car) ->
     car.$save()
