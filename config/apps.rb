@@ -36,3 +36,4 @@ end
 
 Padrino.mount("Automatica::Admin", app_file: Padrino.root('admin/app.rb')).to("/admin")
 Padrino.mount('Automatica::App', app_file: Padrino.root('app/app.rb')).to('/')
+

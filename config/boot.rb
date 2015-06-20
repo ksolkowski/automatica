@@ -40,6 +40,7 @@ require File.join(PADRINO_ROOT, 'config', 'workers.rb')
 Padrino.before_load do
   Time.zone = 'Central Time (US & Canada)'
   Padrino.dependency_paths << Padrino.root('concerns/*.rb')
+  Padrino.dependency_paths << Padrino.root('serializers/*.rb')
 end
 
 ##

@@ -27,6 +27,7 @@ gem 'omniauth'
 gem 'coffee-script'
 gem 'sidekiq'
 gem 'activesupport'
+gem 'active_model_serializers', '~> 0.8.0'
 group :development do 
   gem "sqlite3"
 end

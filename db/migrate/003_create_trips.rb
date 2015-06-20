@@ -7,6 +7,8 @@ Sequel.migration do
       String :start_timezone
       String :end_timezone
 
+      Text   :path
+
       Integer :car_id
       Integer :hard_brakes
       Integer :hard_accels

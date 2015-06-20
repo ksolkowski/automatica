@@ -5,7 +5,8 @@ module Automatica
     register Padrino::Mailer
     register Padrino::Helpers
     register Padrino::Sprockets
-    sprockets
+    sprockets #url: 'assets', root: Padrino.root('app')
+    #Sprockets.append_path File.join Padrino.root, "assets/templates"
 
     # TODO http://www.bactrack.com/pages/api-docs
     #  def json_resource

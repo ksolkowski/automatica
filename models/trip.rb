@@ -18,10 +18,6 @@ class Trip < Sequel::Model
     validates_presence :automatic_id
   end
 
-  # actually fetch this from the api!
-  def path
-  end
-
   # deal with dup cases later
   def self.build_trip(auto_model, car_id)
     trip = self.new(car_id: car_id)
@@ -32,6 +28,7 @@ class Trip < Sequel::Model
     trip.fuel_cost_usd = auto_model.fuel_cost_usd
     trip.fuel_volume_l = auto_model.fuel_volume_l
     trip.average_kmpl = auto_model.average_kmpl
+    trip.path = auto_model.path
     trip.score_events = auto_model.score_events
     trip.score_speeding = auto_model.score_speeding
     trip.hard_brakes = auto_model.hard_brakes

@@ -20,13 +20,23 @@ Automatica::App.helpers do
   end
 
   def render_models
-    get_models.to_json
+    if serializer_defined?
+      get_models.map do |x|
+        serializer.new(x).as_json
+      end.to_json
+    else
+      get_models.to_json
+    end
   end
 
   def render_model
     model = get_model
     if model.present?
-      model.to_json
+      if serializer_defined?
+        serializer.new(model).to_json
+      else
+        model.to_json
+      end
     else
       {}
     end
@@ -52,6 +62,19 @@ Automatica::App.helpers do
       h[k.to_sym] = v
       h
     end
+  end
+
+  def serializer_name
+    params[:serializer].nil? ? "#{resource_name.classify}Serializer" : params[:serializer]
+  end
+
+  def serializer
+    serializer_name.constantize
+  end
+
+  def serializer_defined?
+    # TODO
+    true
   end
 
 end

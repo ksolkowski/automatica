@@ -1,13 +1,12 @@
 %h1 Cars
-
+-if @cars.empty?
+  %li.list-group-item
+    .row
+      .col-md-2 Car not listed?
+      .col-md-8
+      .col-md-2
+        %a{"ng-click" => "fetch()"} Refetch Car list
 %ul.list-group{"ng-init" => "setCars(#{@cars.to_json.html_safe})"}
-  -if @cars.empty?
-    %li.list-group-item
-      .row
-        .col-md-2 Car not listed?
-        .col-md-8
-        .col-md-2
-          %a{"ng-click" => "fetch()"} Refetch Car list
   %li.list-group-item{"ng-repeat" => "car in cars"}
     .row
       .col-md-2
@@ -46,8 +45,12 @@
               %td {{ trip.ended_at | date:'medium' }}
               %td {{ trip.distance_m | number }}m
               %td
-                %button.btn.btn-default{"ng-click" => "getTrip(trip)"} Show Map
-
+                %mapbox{"map-id" => "{{ mapBoxAccessToken }}", lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", zoom: 10, "ng-if" => "trip", width: 200, height: 200}
+                  %feature-layer{data: "{{ trip.geoLine }}"}
+                  %marker{lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", color: "#39cccc", icon: "car"}
+                    {{ trip.start_location.tag | humanize }}
+                  %marker{lat: "{{ trip.end_location.lat }}", lng: "{{ trip.end_location.lon }}", color: "#BBBBBB", icon: "cross"}
+                    {{ trip.end_location.tag | humanize }}
 .panel.panel-default{"ng-if" => "fetchedCars"}
   .panel-heading
     %h3 Add A Car!
