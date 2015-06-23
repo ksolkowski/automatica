@@ -1,6 +1,6 @@
 Automatica::App.controllers :account do
   get :index, map: '/account' do
-    @cars = current_user.cars
+    @cars = current_user.cars.map{|car| CarSerializer.new(car) }
     render :index
   end
 

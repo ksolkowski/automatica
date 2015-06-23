@@ -1,4 +1,4 @@
-Automatica::App.controllers :car do
+Automatica::App.controllers :cars do
 
   # fetch from the API
   get :fetch, map: '/cars/fetch', provides: [:json] do 

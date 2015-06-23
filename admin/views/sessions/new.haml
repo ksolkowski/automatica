@@ -8,7 +8,6 @@
     %meta{:content => 'text/html; charset=utf-8', 'http-equiv' => 'Content-Type'}
     %meta{:name => :viewport, :content => 'width=device-width,initial-scale=1'}
     %title= @title.present? ? "#{@title} | Padrino Admin" : "#{pat('login.title')} | Padrino Admin"
-    = favicon_tag 'favicon.ico'
     = stylesheet_link_tag 'bootstrap', 'application'
   %body
     = form_tag url(:sessions, :create), :class=>'login form-horizontal' do

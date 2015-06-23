@@ -22,7 +22,8 @@ Automatica.controller 'BodyController',  ($scope, $route, Car, Trip, $modal) ->
       resolve:
         trip: -> trip
     )
-  $scope.setCars = (cars) ->
+  $scope.init = (cars) ->
+    console.log cars
     $scope.cars = cars.map((x)-> new Car(x))
   $scope.loadTrips = (car) ->
     car.trips = Trip.query(query: {car_id: car.id})

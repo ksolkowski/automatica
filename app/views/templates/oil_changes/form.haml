@@ -1,0 +1,8 @@
+.modal-header
+  %h3 
+    New Oil Change for {{ car.display_name }}
+    %small.pull-right
+      %a{"ng-click" => 'cancel()', rel: :tooltip, title: "cancel"}
+        =icon_tag "remove"
+.modal-body
+  %pre {{ oil_change | json }}

@@ -1,4 +1,5 @@
 class Trip < Sequel::Model
+  METER_TO_MILE = 0.000621371
   include FindBy
   plugin :validation_helpers
   many_to_one   :car

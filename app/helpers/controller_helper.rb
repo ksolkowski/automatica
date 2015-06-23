@@ -19,6 +19,14 @@ Automatica::App.helpers do
     resource_klass.find_by(build_get_q)
   end
 
+  def save_model
+    # TODO
+  end
+
+  def update_model
+    # TODO
+  end
+
   def render_models
     if serializer_defined?
       get_models.map do |x|

@@ -1,54 +1,45 @@
 %h1 Cars
-%ul.list-group{"ng-init" => "setCars(#{@cars.to_json.html_safe})"}
+%ul.list-group{"ng-init" => "init(#{@cars.to_json.html_safe})"}
   %li.list-group-item{"ng-repeat" => "car in cars"}
     .row
       .col-md-2
         %img.img-thumbnail{src: "http://placehold.it/100/100"}
-      .col-md-9
-        .col-md-1
-          %b Name:
-        .col-md-2 {{ car.display_name }}
-        %br
-        .col-md-1
-          %b Year:
-        .col-md-2 {{ car.year }}
-        %br
-        .col-md-1
-          %b Make:
-        .col-md-2 {{ car.make }}
-        %br
-        .col-md-1
-          %b Model:
-        .col-md-2 {{ car.display_model }}, {{ car.submodel }}
-        %br
-      .col-md-1
-        %i.glyphicon.glyphicon-plus{style: "height: 50px; margin-top: 50px;", "ng-click" => "loadTrips(car)"}
-      .col-md-4
-      .col-md-8{"ng-if" => "car.trips"}
+      .col-md-7
         %table.table
-          %thead
-            %tr
-              %th Start
-              %th End
-              %th 
-                Distance
-                %a{"ng-click" => "whatDistanceUnit()"} ({{ distanceUnit }})
-              %th
           %tbody
-            %tr{"ng-repeat" => "trip in car.trips"}
-              %td {{ trip.started_at | date:'medium' }}
-              %td {{ trip.ended_at | date:'medium' }}
-              %td {{ tripLength(trip.distance_m) | number : 2 }}{{ distanceUnit }}
+            %tr
+              %td 
+                %b Name:
+                {{ car.display_name }}
               %td
-                %span{"ng-if" => "trip.path"}
-                  %button.btn.btn-default{"ng-click" => "viewMap(trip)"} View Map
-                  %mapbox{"map-id" => "{{ mapBoxAccessToken }}", lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", zoom: 10, "ng-if" => "trip", width: 200, height: 200}
-                    %feature-layer{data: "{{ trip.geoLine }}"}
-                    %marker{lat: "{{ trip.start_location.lat }}", lng: "{{ trip.start_location.lon }}", color: "#39cccc", icon: "car"}
-                      {{ trip.start_location.tag | humanize }}
-                    %marker{lat: "{{ trip.end_location.lat }}", lng: "{{ trip.end_location.lon }}", color: "#BBBBBB", icon: "cross"}
-                      {{ trip.end_location.tag | humanize }}
-                %span{"ng-if" => "!trip.path"} No Path Recorded
+                %b Year:
+                {{ car.year }}
+              %td
+                %b Make:
+                {{ car.make }}
+              %td
+                %b Model:
+                {{ car.display_model }}, {{ car.submodel }}
+            %tr
+              %td
+                %b Last Change:
+                %span{"ng-if" => "car.last_oil_change"}
+                  {{ car.last_oil_change.changed_at | date:'medium' }}
+                %span{"ng-if" => "!car.last_oil_change"}
+                  N/A
+              %td
+                %b 
+                  %span{"ng-click" => "whatDistanceUnit()"}
+                    %span{"ng-if" => "distanceUnit == 'm'"}
+                      Meters
+                    %span{"ng-if" => "distanceUnit == 'mi'"}
+                      Miles 
+                  since:
+                {{ tripLength(car.distance_since_last_change) | number: 2 }}
+      .col-md-3
+        %button.btn.btn-default{"ng-click" => "oilChange(car)"}
+          New Oil Change
+          %i.glyphicon.glyphicon-cog
                 
 .panel.panel-default{"ng-if" => "fetchedCars"}
   .panel-heading
